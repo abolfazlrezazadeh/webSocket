@@ -1,10 +1,13 @@
-const { log } = require("console");
-const http = require("http");
+const express = require('express')
+const http = require('http')
+const app = express();
 // const WebSocket = require("ws");
-const server = http.createServer();
+app.use(express.static('./'))
+const server = http.createServer(app);
 const socketIO = require("socket.io");
 const io = socketIO(server, {
   cors: { origin: "*" },
+  serverClient : true
 });
 // const ws = new WebSocket.Server({ server });
 io.on("connection", (socket) => {
