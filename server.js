@@ -6,24 +6,12 @@ app.use(express.static("./"));
 const server = http.createServer(app);
 const socketIO = require("socket.io");
 const io = socketIO(server, {
-  cors: { origin: "*" },
-  serverClient: true,
+  cors: { origin: "*" }, 
 });
 // const ws = new WebSocket.Server({ server });
-io.on("connection", () => {
-  io.of("/").emit("broadCast", "hello every one");
-});
-io.of("/teacher").on("connection", (socket) => {
-  socket.on("teachersClient ", (data) => {
-    console.log(data);
-  });
-  socket.emit("welcome-student", "hello ur backend teacher  ");
-});
-io.of("/student").on("connection", (socket) => {
-  socket.on("studentClient ", (data) => {
-    console.log(data);
-  });
-  socket.emit("welcome-teacher", "hello ur backend student ");
+io.on("connection", (socket) => {
+   console.log(socket.handshake.query);
+   console.log(socket.handshake.headers['authorization']);
 });
 server.listen("3001", () => {
   console.log("running on port 3001 ...");
