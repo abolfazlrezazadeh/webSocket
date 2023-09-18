@@ -23,7 +23,7 @@ socket.on("connect", (data) => {
       return alert("you dont allowed to send empty message");
     }
     socket.emit("clientMessage", message);
-    textBox.value;
+    textBox.value = "";
   });
 });
 socket.on("serverMessage", (message) => {

@@ -1,3 +1,4 @@
+const { log } = require("console");
 const express = require("express");
 const http = require("http");
 const app = express();
@@ -13,6 +14,9 @@ io.on("connection", (socket) => {
    socket.on('clientMessage' ,data =>{
     io.emit('serverMessage' , data)
    })
+   socket.join(["node",'angular'])
+   socket.leave('angular')
+   console.log(socket.rooms);
 });
 server.listen("3001", () => {
   console.log("running on port 3001 ...");
